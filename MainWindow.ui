@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>860</width>
-    <height>500</height>
+    <width>984</width>
+    <height>517</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>6</verstretch>
+   </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
@@ -64,7 +70,7 @@
 background-color: #222b2e;</string>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="page1">
           <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -126,41 +132,113 @@ color: rgb(255, 255, 255);</string>
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <layout class="QHBoxLayout" name="horizontalLayout_6">
+                <layout class="QHBoxLayout" name="horizontalLayout_4">
                  <item>
-                  <widget class="QLabel" name="m1_p1">
+                  <widget class="QFrame" name="frame_8">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                     <horstretch>0</horstretch>
+                     <horstretch>1</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
-                   <property name="styleSheet">
-                    <string notr="true">background-color: #222b2e;
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_4">
+                    <item>
+                     <widget class="QLabel" name="label">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                        <horstretch>0</horstretch>
+                        <verstretch>1</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: #222b2e;
 font: 13pt &quot;楷体&quot;;
 color: rgb(255, 255, 255);</string>
-                   </property>
-                   <property name="text">
-                    <string>图片1</string>
-                   </property>
+                      </property>
+                      <property name="text">
+                       <string>新能源消纳率可视化图</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="m1_p1">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                        <horstretch>0</horstretch>
+                        <verstretch>6</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: #222b2e;
+font: 13pt &quot;楷体&quot;;
+color: rgb(255, 255, 255);</string>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="m1_p2">
+                  <widget class="QFrame" name="frame_9">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                     <horstretch>0</horstretch>
+                     <horstretch>1</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
-                   <property name="styleSheet">
-                    <string notr="true">background-color: #222b2e;
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_6">
+                    <item>
+                     <widget class="QLabel" name="label_2">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                        <horstretch>0</horstretch>
+                        <verstretch>1</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: #222b2e;
 font: 13pt &quot;楷体&quot;;
 color: rgb(255, 255, 255);</string>
-                   </property>
-                   <property name="text">
-                    <string>图片2</string>
-                   </property>
+                      </property>
+                      <property name="text">
+                       <string>线路传输容量可视化图</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="m1_p2">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                        <horstretch>0</horstretch>
+                        <verstretch>6</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: #222b2e;
+font: 13pt &quot;楷体&quot;;
+color: rgb(255, 255, 255);</string>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                 </layout>
@@ -282,23 +360,59 @@ color: rgb(255, 255, 255);</string>
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                <layout class="QVBoxLayout" name="verticalLayout_8">
                  <item>
-                  <widget class="QLabel" name="m1_p3">
+                  <widget class="QFrame" name="frame_10">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
-                   <property name="styleSheet">
-                    <string notr="true">background-color: #222b2e;
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_7">
+                    <item>
+                     <widget class="QLabel" name="label_4">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                        <horstretch>0</horstretch>
+                        <verstretch>1</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: #222b2e;
 font: 13pt &quot;楷体&quot;;
 color: rgb(255, 255, 255);</string>
-                   </property>
-                   <property name="text">
-                    <string>图片3</string>
-                   </property>
+                      </property>
+                      <property name="text">
+                       <string>可调柔性负荷节点编号排序</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="m1_p3">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                        <horstretch>0</horstretch>
+                        <verstretch>6</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: #222b2e;
+font: 13pt &quot;楷体&quot;;
+color: rgb(255, 255, 255);</string>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                 </layout>
@@ -610,7 +724,7 @@ QPushButton:pressed{
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
-               <verstretch>5</verstretch>
+               <verstretch>9</verstretch>
               </sizepolicy>
              </property>
              <property name="font">
@@ -645,31 +759,33 @@ QPushButton:pressed{
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>860</width>
-     <height>40</height>
+     <width>984</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="sizePolicy">
     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
      <horstretch>0</horstretch>
-     <verstretch>1</verstretch>
+     <verstretch>0</verstretch>
     </sizepolicy>
    </property>
    <property name="minimumSize">
     <size>
      <width>0</width>
-     <height>40</height>
+     <height>0</height>
     </size>
    </property>
    <property name="font">
     <font>
      <family>仿宋</family>
-     <pointsize>14</pointsize>
+     <pointsize>11</pointsize>
+     <underline>false</underline>
     </font>
    </property>
    <property name="styleSheet">
     <string notr="true">QMenuBar {
 	background-color: #151a1e;
+ 	border: 1px solid rgb(90, 180, 180); /* 菜单栏的边框 */;
 }
 QMenuBar::item {
 	color: #d3dae3;
@@ -698,7 +814,7 @@ QMenu::item {
     <property name="font">
      <font>
       <family>楷体</family>
-      <pointsize>14</pointsize>
+      <pointsize>11</pointsize>
      </font>
     </property>
     <property name="title">
