@@ -7,7 +7,7 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
 
 
-class M2ResultWindow(QMainWindow):
+class M2ResultWindow(QMainWindow): #运行评估结果界面
     def __init__(self):
         super().__init__()
         self.init_ui()
@@ -29,25 +29,25 @@ class M2ResultWindow(QMainWindow):
         self.button3.clicked.connect(self.r_run3_f)
 
 
-    def r_run1_f(self):
+    def r_run1_f(self): #图片 负荷直接调控结果
         print("1")
         pixmap = QPixmap('./image/r1.png')
         self.label1.setPixmap(pixmap)
         self.label1.setScaledContents(True)
 
-    def r_run2_f(self):
+    def r_run2_f(self): #图片 负荷价格调控结果
         print("2")
         pixmap = QPixmap('./image/r2.png')
         self.label2.setPixmap(pixmap)
         self.label2.setScaledContents(True)
 
-    def r_run3_f(self):
+    def r_run3_f(self): #表格 负荷多元联动调控成本
         print("3")
         pixmap = QPixmap('./image/r3.png')
         self.label3.setPixmap(pixmap)
         self.label3.setScaledContents(True)
 
-class M2Dialog1(QDialog):
+class M2Dialog1(QDialog): #导入运行数据（成功or失败）
     def __init__(self):
         super().__init__()
         self.init_ui()
@@ -55,7 +55,7 @@ class M2Dialog1(QDialog):
     def init_ui(self):
         self.ui = uic.loadUi("./M2Dialog1.ui",self)
 
-class M2Dialog2(QDialog):
+class M2Dialog2(QDialog): #查看运行评估结果
     def __init__(self):
         super().__init__()
         self.init_ui()
@@ -112,24 +112,25 @@ class Main(QMainWindow):
         self.button_m2_btn2.clicked.connect(self.m2_run2_f)
         self.button_m2_btn3.clicked.connect(self.m2_run3_f)
 
-    def m2_run1_f(self):
+    def m2_run1_f(self): #导入电网数据
         pixmap = QPixmap('./image/img.png')
         self.label4.setPixmap(pixmap)
         self.label4.setScaledContents(True)
+        #print("m2_run1")
 
     #显示运行数据成功窗口
-    def m2_run2_f(self):
+    def m2_run2_f(self): #导入运行数据
         self.m2_dialog1 = M2Dialog1()
         self.m2_dialog1.show()
 
-    def m2_run3_f(self):
+    def m2_run3_f(self): #运行评估
         print("run3")
         self.m2_dialog2 = M2Dialog2()
         self.m2_dialog2.show()
 
 
     def m1_run1_f(self):
-        pixmap1 = QPixmap('./image/p1.png')  # 替换为您的图片文件路径
+        pixmap1 = QPixmap('./image/p1.png')  # 替换为图片文件路径
         pixmap2 = QPixmap('./image/p2.png')
 
 
@@ -145,11 +146,11 @@ class Main(QMainWindow):
         self.label3.setPixmap(pixmap)
         self.label3.setScaledContents(True)
         #print("run:2")
-    def open1(self):
+    def open1(self): #打开模块1
         self.stackedWidget.setCurrentIndex(0)
         #print("11111")
 
-    def open2(self):
+    def open2(self): #打开模块2
         self.stackedWidget.setCurrentIndex(1)
         #print("22222")
 
