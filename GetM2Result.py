@@ -18,8 +18,8 @@ def startM2ResultMain():
     # 将MATLAB文件所在的目录添加到MATLAB的搜索路径中
     eng.addpath(absolute_matlab_path, nargout=0)
 
-    # 调用MATLAB函数
-    eng.main()
+    # 调用MATLAB脚本
+    eng.run('main', nargout=0)
 
     eng.quit()
 

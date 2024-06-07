@@ -6,6 +6,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
 
+import GetM2Result
+
 
 class M2ResultWindow(QMainWindow): #运行评估结果界面
     def __init__(self):
@@ -31,13 +33,13 @@ class M2ResultWindow(QMainWindow): #运行评估结果界面
 
     def r_run1_f(self): #图片 负荷直接调控结果
         print("1")
-        pixmap = QPixmap('./image/r1.png')
+        pixmap = QPixmap('./DLMPs.png')
         self.label1.setPixmap(pixmap)
         self.label1.setScaledContents(True)
 
     def r_run2_f(self): #图片 负荷价格调控结果
         print("2")
-        pixmap = QPixmap('./image/r2.png')
+        pixmap = QPixmap('./ Loadshedding.png')
         self.label2.setPixmap(pixmap)
         self.label2.setScaledContents(True)
 
@@ -125,6 +127,9 @@ class Main(QMainWindow):
 
     def m2_run3_f(self): #运行评估
         print("run3")
+
+        GetM2Result.startM2ResultMain()
+
         self.m2_dialog2 = M2Dialog2()
         self.m2_dialog2.show()
 
