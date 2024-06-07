@@ -4,7 +4,7 @@ import sys
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 
 import GetM2Result
 
@@ -73,11 +73,26 @@ class M2Dialog2(QDialog): #查看运行评估结果
         #print("show")
 
 
+class M2Dialog2Waiting(QDialog):  # 查看运行评估结果
+    def __init__(self):
+        super().__init__()
+        self.init_ui()
 
+    def init_ui(self):
+        self.ui = uic.loadUi("./M2Dialog2Waiting.ui", self)
 
 
 
 # 主窗口类
+class M2Dialog2Waiting1(QDialog): #查看运行评估结果
+    def __init__(self):
+        super().__init__()
+        self.init_ui()
+
+    def init_ui(self):
+        self.ui = uic.loadUi("./M2Dialog2Waiting.ui",self)
+
+
 class Main(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -128,7 +143,10 @@ class Main(QMainWindow):
     def m2_run3_f(self): #运行评估
         print("run3")
 
-        GetM2Result.startM2ResultMain()
+
+        GetM2Result.runWaiting.run(self)
+        GetM2Result.runMatlab.run(self)
+        #GetM2Result.startM2ResultMain()
 
         self.m2_dialog2 = M2Dialog2()
         self.m2_dialog2.show()
