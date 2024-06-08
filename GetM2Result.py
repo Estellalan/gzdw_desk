@@ -18,13 +18,14 @@ class runWaiting:
 
 
 class runMatlab(QThread):
-
+    begin = pyqtSignal()
     finished = pyqtSignal()
 
     def __init__(self):
         super().__init__()
 
     def run(self):
+        self.begin.emit()
         print("runMatlab....")
         self.startM2ResultMain() #运行matlab
         self.finished.emit()

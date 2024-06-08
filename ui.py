@@ -96,11 +96,14 @@ class M2Dialog2Waiting1(QDialog): #查看运行评估结果
 class Main(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.statusbar = None
         self.init_ui()
         self.setGeometry(100, 100, 800,500)
 
     def init_ui(self):
         self.ui = uic.loadUi("./MainWindow.ui",self)
+
+        self.statusbar = self.ui.statusbar
 
         self.m2_dialog2 = M2Dialog2()
         #================================================
@@ -144,23 +147,23 @@ class Main(QMainWindow):
     def m2_run3_f(self): #运行评估
         print("run3")
 
-        self.openM2WaitingDailog()
-
         self.thread_getResult = GetM2Result.runMatlab()
         self.thread_getResult.start() #开启matlab运行线程
-        self.thread_getResult.finished.connect(self.openM2ResultDialog)
-        #GetM2Result.startM2ResultMain()
-        #self.u_thread.finished.connect(self.finishUNV)
+        self.thread_getResult.begin.connect(self.showStateBarMessgeM2ResultRuning)
+        self.thread_getResult.finished.connect( self.showStateBarMessgeM2ResultFinished)
+
 
         #self.openM2ResultDialog()
 
-    def openM2WaitingDailog(self):
-        self.m2_dialog2Waiting = M2Dialog2Waiting()
-        self.m2_dialog2Waiting.show()
+    def showStateBarMessgeM2ResultRuning(self):
+            self.statusbar.showMessage("matlab程序正在运行，耗时较长，请稍等")
+
+    def showStateBarMessgeM2ResultFinished(self):
+            self.statusbar.showMessage("运行成功！请查看结果！")
+            self.openM2ResultDialog()
 
     def openM2ResultDialog(self):
-        print("openM2ResultDialog")
-        self.m2_dialog2Waiting.close()
+
         self.m2_dialog2 = M2Dialog2()
         self.m2_dialog2.show()
 

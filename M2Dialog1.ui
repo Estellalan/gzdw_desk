@@ -14,7 +14,7 @@
    <string>导入运行数据</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #222b2e;</string>
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -47,17 +47,15 @@
         </property>
         <property name="font">
          <font>
-          <family>楷体</family>
-          <pointsize>15</pointsize>
-          <weight>50</weight>
+          <family>Microsoft YaHei</family>
+          <pointsize>14</pointsize>
+          <weight>3</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);
-font: 15pt &quot;楷体&quot;;
- text-align: center;</string>
+         <string notr="true">font: 25 14pt &quot;Microsoft YaHei&quot;;</string>
         </property>
         <property name="text">
          <string> 运行数据导入成功！</string>
