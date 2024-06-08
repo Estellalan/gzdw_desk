@@ -116,6 +116,18 @@ QFrame{
            <verstretch>1</verstretch>
           </sizepolicy>
          </property>
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>55</height>
+          </size>
+         </property>
          <property name="text">
           <string>点击显示</string>
          </property>
@@ -182,6 +194,18 @@ QFrame{
               <verstretch>1</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>55</height>
+             </size>
+            </property>
             <property name="text">
              <string>点击显示</string>
             </property>
@@ -232,6 +256,18 @@ QFrame{
               <horstretch>0</horstretch>
               <verstretch>1</verstretch>
              </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>55</height>
+             </size>
             </property>
             <property name="text">
              <string>点击显示</string>

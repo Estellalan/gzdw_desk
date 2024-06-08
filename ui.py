@@ -73,7 +73,7 @@ class M2Dialog2(QDialog): #查看运行评估结果
         #print("show")
 
 
-class M2Dialog2Waiting(QDialog):  # 查看运行评估结果
+class M2Dialog2Waiting(QDialog):  # 等待运行评估结果
     def __init__(self):
         super().__init__()
         self.init_ui()
@@ -102,6 +102,7 @@ class Main(QMainWindow):
     def init_ui(self):
         self.ui = uic.loadUi("./MainWindow.ui",self)
 
+        self.m2_dialog2 = M2Dialog2()
         #================================================
         self.button_run1 = self.ui.m1_run1
         self.button_run2 = self.ui.m1_run2
@@ -143,14 +144,25 @@ class Main(QMainWindow):
     def m2_run3_f(self): #运行评估
         print("run3")
 
+        self.openM2WaitingDailog()
 
-        GetM2Result.runWaiting.run(self)
-        GetM2Result.runMatlab.run(self)
+        self.thread_getResult = GetM2Result.runMatlab()
+        self.thread_getResult.start() #开启matlab运行线程
+        self.thread_getResult.finished.connect(self.openM2ResultDialog)
         #GetM2Result.startM2ResultMain()
+        #self.u_thread.finished.connect(self.finishUNV)
 
+        #self.openM2ResultDialog()
+
+    def openM2WaitingDailog(self):
+        self.m2_dialog2Waiting = M2Dialog2Waiting()
+        self.m2_dialog2Waiting.show()
+
+    def openM2ResultDialog(self):
+        print("openM2ResultDialog")
+        self.m2_dialog2Waiting.close()
         self.m2_dialog2 = M2Dialog2()
         self.m2_dialog2.show()
-
 
     def m1_run1_f(self):
         pixmap1 = QPixmap('./image/p1.png')  # 替换为图片文件路径
