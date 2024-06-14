@@ -5,15 +5,10 @@ from PyQt5 import uic
 from PyQt5.QtCore import pyqtSignal, QThread
 from PyQt5.QtWidgets import QDialog
 
-from ui import M2Dialog1, M2Dialog2Waiting, M2Dialog2
 
 
-class runWaiting:
-    def openWaiting(self):
-        print("runWaiting....")
 
-        self.m2_dialog2Waiting = M2Dialog2Waiting()
-        self.m2_dialog2Waiting.show()
+
 
 
 
@@ -38,7 +33,7 @@ class runMatlab(QThread):
         current_dir = os.path.dirname(os.path.abspath(__file__))
 
         # 构建MATLAB文件相对于Python脚本的路径
-        relative_matlab_path = './guizhou_xinyi'
+        relative_matlab_path = 'matlab_lib/guizhou_xinyi'
         absolute_matlab_path = os.path.join(current_dir, relative_matlab_path)
 
         # 启动MATLAB引擎

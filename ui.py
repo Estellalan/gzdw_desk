@@ -6,7 +6,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt, pyqtSignal
 
-import GetM2Result
+import GetM1Result_yinshan
+import GetM2Result_xinyi
 
 
 class M2ResultWindow(QMainWindow): #运行评估结果界面
@@ -33,13 +34,13 @@ class M2ResultWindow(QMainWindow): #运行评估结果界面
 
     def r_run1_f(self): #图片 负荷直接调控结果
         print("1")
-        pixmap = QPixmap('./DLMPs.png')
+        pixmap = QPixmap('./DLMPs_xinyi.png')
         self.label1.setPixmap(pixmap)
         self.label1.setScaledContents(True)
 
     def r_run2_f(self): #图片 负荷价格调控结果
         print("2")
-        pixmap = QPixmap('./ Loadshedding.png')
+        pixmap = QPixmap('./Loadshedding_xinyi.png')
         self.label2.setPixmap(pixmap)
         self.label2.setScaledContents(True)
 
@@ -147,7 +148,7 @@ class Main(QMainWindow):
     def m2_run3_f(self): #运行评估
         print("run3")
 
-        self.thread_getResult = GetM2Result.runMatlab()
+        self.thread_getResult = GetM2Result_xinyi.runMatlab()
         self.thread_getResult.start() #开启matlab运行线程
         self.thread_getResult.begin.connect(self.showStateBarMessgeM2ResultRuning)
         self.thread_getResult.finished.connect( self.showStateBarMessgeM2ResultFinished)
@@ -167,19 +168,29 @@ class Main(QMainWindow):
         self.m2_dialog2 = M2Dialog2()
         self.m2_dialog2.show()
 
-    def m1_run1_f(self):
-        pixmap1 = QPixmap('./image/p1.png')  # 替换为图片文件路径
-        pixmap2 = QPixmap('./image/p2.png')
+    def m1_run1_f(self): # 新能源消纳|线路传输容量
+        self.thread_getResult = GetM1Result_yinshan.runMatlab()
+        self.thread_getResult.start() #开启matlab运行线程
+        self.thread_getResult.begin.connect(self.showStateBarMessgeM1Result_yinshan_Runing)
+        self.thread_getResult.finished.connect( self.showStateBarMessgeM1Result_yinshan_Finished)
 
-
-        self.label1.setPixmap(pixmap1)
-        self.label2.setPixmap(pixmap2)
-
-        self.label1.setScaledContents(True)
-        self.label2.setScaledContents(True)
         #print("run:1")
 
-    def m1_run2_f(self):
+    def showStateBarMessgeM1Result_yinshan_Runing(self):
+            self.statusbar.showMessage("matlab程序正在运行，耗时较长，请稍等")
+
+    def showStateBarMessgeM1Result_yinshan_Finished(self):
+            self.statusbar.showMessage("运行成功！请查看结果！")
+            pixmap1 = QPixmap('./DLMPs_yinshan.png')
+            pixmap2 = QPixmap('./Loadshedding_yinshan.png')
+
+            self.label1.setPixmap(pixmap1)
+            self.label2.setPixmap(pixmap2)
+
+            self.label1.setScaledContents(True)
+            self.label2.setScaledContents(True)
+
+    def m1_run2_f(self): #可调节点排序图
         pixmap = QPixmap('./image/p3.png')
         self.label3.setPixmap(pixmap)
         self.label3.setScaledContents(True)

@@ -88,23 +88,23 @@ end
 figure;
 heatmap( DLMP(:,:,k_pmp+1));
 % Customize the heatmap (optional)
-xlabel('Hour of the Day');
-ylabel('Node');
-title('Heatmap of DLMPs Over 24 Hours');
+xlabel('小时(h)');
+ylabel('节点');
+title('节点边际电价(CNY/kWh)');
 colormap jet; % Change the colormap to 'jet' (optional)
 colorbar; % Show colorbar  
 % Save the heatmap as a PNG file
-output_DLMP = 'DLMPs.png';
+output_DLMP = 'DLMPs_xinyi.png';
 saveas(gcf, output_DLMP);
 
 
 heatmap(SL_D);
 % Customize the heatmap (optional)
-xlabel('Hour of the Day');
-ylabel('Node');
-title('Heatmap of Load shedding Over 24 Hours');
+xlabel('小时(h)');
+ylabel('节点');
+title('负荷调控结果(MWh)');
 colormap winter; % Change the colormap to 'jet' (optional)
 colorbar; % Show colorbar  
 % Save the heatmap as a PNG file
-output_Loadshedding = ' Loadshedding.png';
+output_Loadshedding = 'Loadshedding_xinyi.png';
 saveas(gcf, output_Loadshedding);
