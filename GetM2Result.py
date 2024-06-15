@@ -6,17 +6,12 @@ from PyQt5.QtCore import pyqtSignal, QThread
 from PyQt5.QtWidgets import QDialog
 
 
-
-
-
-
-
-
 class runMatlab(QThread):
     begin = pyqtSignal()
     finished = pyqtSignal()
 
-    def __init__(self):
+    def __init__(self,gzdw_data):
+        self.gzdw_data=gzdw_data
         super().__init__()
 
     def run(self):
@@ -33,8 +28,11 @@ class runMatlab(QThread):
         current_dir = os.path.dirname(os.path.abspath(__file__))
 
         # 构建MATLAB文件相对于Python脚本的路径
-        relative_matlab_path = 'matlab_lib/guizhou_yinshan'
-        absolute_matlab_path = os.path.join(current_dir, relative_matlab_path)
+        relative_matlab_path = 'matlab_lib/guizhou_xinyi'
+        relative_matlab_path_now = 'matlab_lib/guizhou_'+self.gzdw_data
+        print(relative_matlab_path+" "+relative_matlab_path_now)
+        absolute_matlab_path = os.path.join(current_dir, relative_matlab_path_now)
+        #absolute_matlab_path = os.path.join(current_dir, relative_matlab_path)
 
         # 启动MATLAB引擎
         eng = matlab.engine.start_matlab()
@@ -43,6 +41,6 @@ class runMatlab(QThread):
         eng.addpath(absolute_matlab_path, nargout=0)
 
         # 调用MATLAB脚本
-        eng.run('key_line_yinshan', nargout=0)
+        eng.run('main', nargout=0)
 
         eng.quit()

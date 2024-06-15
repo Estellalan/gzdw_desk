@@ -119,7 +119,7 @@ QPushButton:pressed{
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>1</horstretch>
-               <verstretch>0</verstretch>
+               <verstretch>7</verstretch>
               </sizepolicy>
              </property>
              <property name="styleSheet">
@@ -231,43 +231,6 @@ border:0px
                 </layout>
                </widget>
               </item>
-              <item>
-               <widget class="QPushButton" name="m1_run2">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>1</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>200</width>
-                  <height>45</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>55</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>Microsoft YaHei</family>
-                  <pointsize>-1</pointsize>
-                  <weight>75</weight>
-                  <italic>false</italic>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true"/>
-                </property>
-                <property name="text">
-                 <string>运行</string>
-                </property>
-               </widget>
-              </item>
              </layout>
             </widget>
            </item>
@@ -276,7 +239,7 @@ border:0px
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>2</horstretch>
-               <verstretch>0</verstretch>
+               <verstretch>7</verstretch>
               </sizepolicy>
              </property>
              <property name="styleSheet">
@@ -450,6 +413,34 @@ border:0px
                 </layout>
                </widget>
               </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_11">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>1</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">
+.QFrame{
+background-color:rgb(255, 255, 255);
+border-radius:10px;
+border:0px
+}
+
+</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_9">
               <item>
                <widget class="QPushButton" name="m1_run1">
                 <property name="sizePolicy">
@@ -781,7 +772,15 @@ QPushButton:pressed{
     <addaction name="action1"/>
     <addaction name="action2"/>
    </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>数据选择</string>
+    </property>
+    <addaction name="data_select_xinyi"/>
+    <addaction name="data_select_yinshan"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="to_module1">
@@ -807,6 +806,16 @@ QPushButton:pressed{
   <action name="action2">
    <property name="text">
     <string>模块二</string>
+   </property>
+  </action>
+  <action name="data_select_xinyi">
+   <property name="text">
+    <string>xinyi</string>
+   </property>
+  </action>
+  <action name="data_select_yinshan">
+   <property name="text">
+    <string>yinshan</string>
    </property>
   </action>
  </widget>

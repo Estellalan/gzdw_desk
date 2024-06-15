@@ -6,12 +6,6 @@ from PyQt5.QtCore import pyqtSignal, QThread
 from PyQt5.QtWidgets import QDialog
 
 
-
-
-
-
-
-
 class runMatlab(QThread):
     begin = pyqtSignal()
     finished = pyqtSignal()

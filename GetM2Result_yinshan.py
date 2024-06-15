@@ -5,10 +5,15 @@ from PyQt5 import uic
 from PyQt5.QtCore import pyqtSignal, QThread
 from PyQt5.QtWidgets import QDialog
 
+from ui import M2Dialog1, M2Dialog2
 
 
+class runWaiting:
+    def openWaiting(self):
+        print("runWaiting....")
 
-
+        self.m2_dialog2Waiting = M2Dialog2Waiting()
+        self.m2_dialog2Waiting.show()
 
 
 
@@ -21,12 +26,12 @@ class runMatlab(QThread):
 
     def run(self):
         self.begin.emit()
-        print("runMatlab....")
-        self.startM2ResultMain() #运行matlab
+        print("runMatlab-yinshyan....")
+        self.startRun() #运行matlab
         self.finished.emit()
 
 
-    def startM2ResultMain(self):
+    def startRun(self):
         eng = matlab.engine.start_matlab()
 
         # 获取当前Python脚本所在目录的绝对路径
@@ -43,6 +48,6 @@ class runMatlab(QThread):
         eng.addpath(absolute_matlab_path, nargout=0)
 
         # 调用MATLAB脚本
-        eng.run('key_line_yinshan', nargout=0)
+        eng.run('main', nargout=0)
 
         eng.quit()

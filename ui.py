@@ -6,16 +6,19 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt, pyqtSignal
 
-import GetM1Result_yinshan
+import GetM2Result_yinshan
 import GetM2Result_xinyi
+import GetM2Result
 
 
 class M2ResultWindow(QMainWindow): #运行评估结果界面
-    def __init__(self):
+    def __init__(self,gzdw_data):
         super().__init__()
+        self.gzdw_data = gzdw_data
         self.init_ui()
         self.setGeometry(100, 100, 800,500)
-
+        self.img_DLMP = './DLMPs_'+gzdw_data+'.png'
+        self.img_Loadshedding = './Loadshedding_'+gzdw_data+'.png'
     def init_ui(self):
         self.ui = uic.loadUi("./M2ResultWindow.ui",self)
 
@@ -33,14 +36,14 @@ class M2ResultWindow(QMainWindow): #运行评估结果界面
 
 
     def r_run1_f(self): #图片 负荷直接调控结果
-        print("1")
-        pixmap = QPixmap('./DLMPs_xinyi.png')
+        print(self.img_DLMP)
+        pixmap = QPixmap(self.img_DLMP)
         self.label1.setPixmap(pixmap)
         self.label1.setScaledContents(True)
 
     def r_run2_f(self): #图片 负荷价格调控结果
-        print("2")
-        pixmap = QPixmap('./Loadshedding_xinyi.png')
+        print(self.img_Loadshedding)
+        pixmap = QPixmap(self.img_Loadshedding)
         self.label2.setPixmap(pixmap)
         self.label2.setScaledContents(True)
 
@@ -59,8 +62,9 @@ class M2Dialog1(QDialog): #导入运行数据（成功or失败）
         self.ui = uic.loadUi("./M2Dialog1.ui",self)
 
 class M2Dialog2(QDialog): #查看运行评估结果
-    def __init__(self):
+    def __init__(self,gzdw_data):
         super().__init__()
+        self.gzdw_data = gzdw_data
         self.init_ui()
 
     def init_ui(self):
@@ -69,18 +73,10 @@ class M2Dialog2(QDialog): #查看运行评估结果
         self.button_show.clicked.connect(self.show_result)
 
     def show_result(self):
-        self.result_window = M2ResultWindow()
+        self.result_window = M2ResultWindow(self.gzdw_data)
         self.result_window.show()
         #print("show")
 
-
-class M2Dialog2Waiting(QDialog):  # 等待运行评估结果
-    def __init__(self):
-        super().__init__()
-        self.init_ui()
-
-    def init_ui(self):
-        self.ui = uic.loadUi("./M2Dialog2Waiting.ui", self)
 
 
 
@@ -98,6 +94,8 @@ class Main(QMainWindow):
     def __init__(self):
         super().__init__()
         self.statusbar = None
+        self.gzdw_data = "xinyi"
+
         self.init_ui()
         self.setGeometry(100, 100, 800,500)
 
@@ -106,10 +104,10 @@ class Main(QMainWindow):
 
         self.statusbar = self.ui.statusbar
 
-        self.m2_dialog2 = M2Dialog2()
+        self.m2_dialog2 = M2Dialog2(self.gzdw_data)
         #================================================
         self.button_run1 = self.ui.m1_run1
-        self.button_run2 = self.ui.m1_run2
+        #self.button_run2 = self.ui.m1_run2
 
         self.button_m2_btn1 = self.ui.m2_btn1
         self.button_m2_btn2 = self.ui.m2_btn2
@@ -122,21 +120,30 @@ class Main(QMainWindow):
 
         self.action1 = self.ui.action1
         self.action2 = self.ui.action2
+        #data_select_xinyin
+        self.action_data_select_xinyi = self.ui.data_select_xinyi
+        self.action_data_select_yinshan = self.ui.data_select_yinshan
 
         #===========================================
         self.action1.triggered.connect(self.open1)
         self.action2.triggered.connect(self.open2)
+        self.action_data_select_xinyi.triggered.connect(lambda: self.select_data("xinyi"))
+        self.action_data_select_yinshan.triggered.connect(lambda: self.select_data("yinshan"))
 
         self.button_run1.clicked.connect(self.m1_run1_f)
-        self.button_run2.clicked.connect(self.m1_run2_f)
+        #self.button_run2.clicked.connect(self.m1_run2_f)
 
         self.button_m2_btn1.clicked.connect(self.m2_run1_f)
         self.button_m2_btn2.clicked.connect(self.m2_run2_f)
         self.button_m2_btn3.clicked.connect(self.m2_run3_f)
 
+    def select_data(self,data):
+        self.gzdw_data = data
+        print("using data: "+self.gzdw_data)
     def m2_run1_f(self): #导入电网数据
-        pixmap = QPixmap('./image/img.png')
-        self.label4.setPixmap(pixmap)
+        self.gzdw_data_img_path = "image/"+self.gzdw_data+".png"
+        self.gzdw_data_img = QPixmap(self.gzdw_data_img_path)
+        self.label4.setPixmap(self.gzdw_data_img)
         self.label4.setScaledContents(True)
         #print("m2_run1")
 
@@ -148,10 +155,17 @@ class Main(QMainWindow):
     def m2_run3_f(self): #运行评估
         print("run3")
 
-        self.thread_getResult = GetM2Result_xinyi.runMatlab()
-        self.thread_getResult.start() #开启matlab运行线程
-        self.thread_getResult.begin.connect(self.showStateBarMessgeM2ResultRuning)
-        self.thread_getResult.finished.connect( self.showStateBarMessgeM2ResultFinished)
+        #self.getM2Result = GetM2Result(self,self.gzdw_data)
+
+        self.thread_m2_matlab = GetM2Result.runMatlab(self.gzdw_data)
+        self.thread_m2_matlab.start()
+        self.thread_m2_matlab.begin.connect(self.showStateBarMessgeM2ResultRuning)
+        self.thread_m2_matlab.finished.connect(self.showStateBarMessgeM2ResultFinished)
+
+        #self.thread_getResult = GetM2Result_xinyi.runMatlab()
+        #self.thread_getResult.start() #开启matlab运行线程
+        #self.thread_getResult.begin.connect(self.showStateBarMessgeM2ResultRuning)
+        #self.thread_getResult.finished.connect( self.showStateBarMessgeM2ResultFinished)
 
 
         #self.openM2ResultDialog()
@@ -165,14 +179,14 @@ class Main(QMainWindow):
 
     def openM2ResultDialog(self):
 
-        self.m2_dialog2 = M2Dialog2()
+        self.m2_dialog2 = M2Dialog2(self.gzdw_data)
         self.m2_dialog2.show()
 
     def m1_run1_f(self): # 新能源消纳|线路传输容量
-        self.thread_getResult = GetM1Result_yinshan.runMatlab()
+        self.thread_getResult = GetM2Result_yinshan.runMatlab()
         self.thread_getResult.start() #开启matlab运行线程
         self.thread_getResult.begin.connect(self.showStateBarMessgeM1Result_yinshan_Runing)
-        self.thread_getResult.finished.connect( self.showStateBarMessgeM1Result_yinshan_Finished)
+        self.thread_getResult.finished.connect(self.showStateBarMessgeM1Result_yinshan_Finished)
 
         #print("run:1")
 
@@ -190,11 +204,7 @@ class Main(QMainWindow):
             self.label1.setScaledContents(True)
             self.label2.setScaledContents(True)
 
-    def m1_run2_f(self): #可调节点排序图
-        pixmap = QPixmap('./image/p3.png')
-        self.label3.setPixmap(pixmap)
-        self.label3.setScaledContents(True)
-        #print("run:2")
+
     def open1(self): #打开模块1
         self.stackedWidget.setCurrentIndex(0)
         #print("11111")
