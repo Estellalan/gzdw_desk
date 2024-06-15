@@ -6,8 +6,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt, pyqtSignal
 
-import GetM2Result_yinshan
-import GetM2Result_xinyi
+import GetM1Result
 import GetM2Result
 
 
@@ -19,20 +18,20 @@ class M2ResultWindow(QMainWindow): #运行评估结果界面
         self.setGeometry(100, 100, 800,500)
         self.img_DLMP = './DLMPs_'+gzdw_data+'.png'
         self.img_Loadshedding = './Loadshedding_'+gzdw_data+'.png'
+        print("")
     def init_ui(self):
         self.ui = uic.loadUi("./M2ResultWindow.ui",self)
 
         self.button1 = self.ui.r_btn1
         self.button2 = self.ui.r_btn2
-        self.button3 = self.ui.r_btn3
+
 
         self.label1 = self.ui.r_p1
         self.label2 = self.ui.r_p2
-        self.label3 = self.ui.r_p3
+
 
         self.button1.clicked.connect(self.r_run1_f)
         self.button2.clicked.connect(self.r_run2_f)
-        self.button3.clicked.connect(self.r_run3_f)
 
 
     def r_run1_f(self): #图片 负荷直接调控结果
@@ -47,11 +46,7 @@ class M2ResultWindow(QMainWindow): #运行评估结果界面
         self.label2.setPixmap(pixmap)
         self.label2.setScaledContents(True)
 
-    def r_run3_f(self): #表格 负荷多元联动调控成本
-        print("3")
-        pixmap = QPixmap('./image/r3.png')
-        self.label3.setPixmap(pixmap)
-        self.label3.setScaledContents(True)
+
 
 class M2Dialog1(QDialog): #导入运行数据（成功or失败）
     def __init__(self):
@@ -71,23 +66,15 @@ class M2Dialog2(QDialog): #查看运行评估结果
         self.ui = uic.loadUi("./M2Dialog2.ui",self)
         self.button_show = self.ui.show_btn
         self.button_show.clicked.connect(self.show_result)
+        print("")
 
     def show_result(self):
         self.result_window = M2ResultWindow(self.gzdw_data)
         self.result_window.show()
-        #print("show")
-
-
+        print("show")
 
 
 # 主窗口类
-class M2Dialog2Waiting1(QDialog): #查看运行评估结果
-    def __init__(self):
-        super().__init__()
-        self.init_ui()
-
-    def init_ui(self):
-        self.ui = uic.loadUi("./M2Dialog2Waiting.ui",self)
 
 
 class Main(QMainWindow):
@@ -158,6 +145,7 @@ class Main(QMainWindow):
         #self.getM2Result = GetM2Result(self,self.gzdw_data)
 
         self.thread_m2_matlab = GetM2Result.runMatlab(self.gzdw_data)
+        #self.showStateBarMessgeM2ResultFinished()
         self.thread_m2_matlab.start()
         self.thread_m2_matlab.begin.connect(self.showStateBarMessgeM2ResultRuning)
         self.thread_m2_matlab.finished.connect(self.showStateBarMessgeM2ResultFinished)
@@ -176,42 +164,57 @@ class Main(QMainWindow):
     def showStateBarMessgeM2ResultFinished(self):
             self.statusbar.showMessage("运行成功！请查看结果！")
             self.openM2ResultDialog()
-
+            print("")
     def openM2ResultDialog(self):
 
         self.m2_dialog2 = M2Dialog2(self.gzdw_data)
         self.m2_dialog2.show()
+        print("")
 
     def m1_run1_f(self): # 新能源消纳|线路传输容量
-        self.thread_getResult = GetM2Result_yinshan.runMatlab()
-        self.thread_getResult.start() #开启matlab运行线程
-        self.thread_getResult.begin.connect(self.showStateBarMessgeM1Result_yinshan_Runing)
-        self.thread_getResult.finished.connect(self.showStateBarMessgeM1Result_yinshan_Finished)
+        self.thread_run_m1_matlab = GetM1Result.runMatlab(self.gzdw_data)
+        #self.showStateBarMessgeM1ResultFinished() #直接显示图片，测试时使用
+        self.thread_run_m1_matlab.start() #开启matlab运行线程
+        self.thread_run_m1_matlab.begin.connect(self.showStateBarMessgeM1ResultRuning)
+        self.thread_run_m1_matlab.finished.connect(self.showStateBarMessgeM1ResultFinished)
 
-        #print("run:1")
 
-    def showStateBarMessgeM1Result_yinshan_Runing(self):
+
+    def showStateBarMessgeM1ResultRuning(self):
             self.statusbar.showMessage("matlab程序正在运行，耗时较长，请稍等")
 
-    def showStateBarMessgeM1Result_yinshan_Finished(self):
+    def showStateBarMessgeM1ResultFinished(self):
             self.statusbar.showMessage("运行成功！请查看结果！")
-            pixmap1 = QPixmap('./DLMPs_yinshan.png')
-            pixmap2 = QPixmap('./Loadshedding_yinshan.png')
+            self.img_LC_path = 'LC_'+self.gzdw_data+'.png'
+            self.img_REC_path = 'REC_'+self.gzdw_data+'.png'
+            self.img_REC_change_path = 'REC_change_'+self.gzdw_data+'.png'
 
-            self.label1.setPixmap(pixmap1)
-            self.label2.setPixmap(pixmap2)
+            print(self.img_LC_path+" "+self.img_REC_path+" "+self.img_REC_change_path)
 
+            img_LC = QPixmap(self.img_LC_path)
+            img_REC = QPixmap(self.img_REC_path)
+            img_REC_change = QPixmap(self.img_REC_change_path)
+
+            self.label1.setPixmap(img_LC)
+            self.label2.setPixmap(img_REC)
+            self.label3.setPixmap(img_REC_change)
+
+            self.label1.setAlignment(Qt.AlignCenter)
+            self.label2.setAlignment(Qt.AlignCenter)
+            self.label3.setAlignment(Qt.AlignCenter)
+
+            self.label3.setScaledContents(True)
             self.label1.setScaledContents(True)
             self.label2.setScaledContents(True)
 
 
     def open1(self): #打开模块1
         self.stackedWidget.setCurrentIndex(0)
-        #print("11111")
+
 
     def open2(self): #打开模块2
         self.stackedWidget.setCurrentIndex(1)
-        #print("22222")
+
 
 
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1000</width>
-    <height>1000</height>
+    <height>1300</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,7 +19,7 @@
   <property name="minimumSize">
    <size>
     <width>1000</width>
-    <height>1000</height>
+    <height>1300</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -119,7 +119,7 @@ QPushButton:pressed{
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>1</horstretch>
-               <verstretch>7</verstretch>
+               <verstretch>12</verstretch>
               </sizepolicy>
              </property>
              <property name="styleSheet">
@@ -149,7 +149,7 @@ border:0px
                  <string notr="true"/>
                 </property>
                 <property name="text">
-                 <string>新能源消纳薄弱点对应的可调柔性负荷节点编号排序</string>
+                 <string>输配协同下运行薄弱点关联潮流快速辨识与响应技术模块</string>
                 </property>
                </widget>
               </item>
@@ -158,7 +158,7 @@ border:0px
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
-                  <verstretch>9</verstretch>
+                  <verstretch>7</verstretch>
                  </sizepolicy>
                 </property>
                 <property name="frameShape">
@@ -167,7 +167,7 @@ border:0px
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <layout class="QVBoxLayout" name="verticalLayout_8">
+                <layout class="QHBoxLayout" name="horizontalLayout_3">
                  <item>
                   <widget class="QFrame" name="frame_10">
                    <property name="sizePolicy">
@@ -196,8 +196,8 @@ border:0px
                     <item>
                      <widget class="QLabel" name="label_4">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
+                       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                        <horstretch>3</horstretch>
                         <verstretch>1</verstretch>
                        </sizepolicy>
                       </property>
@@ -205,24 +205,51 @@ border:0px
                        <string notr="true"/>
                       </property>
                       <property name="text">
-                       <string>可调柔性负荷节点编号排序</string>
+                       <string>新能源消纳率响应前后可视图</string>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLabel" name="m1_p3">
+                     <widget class="QFrame" name="frame_12">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                         <horstretch>0</horstretch>
-                        <verstretch>6</verstretch>
+                        <verstretch>10</verstretch>
                        </sizepolicy>
                       </property>
-                      <property name="styleSheet">
-                       <string notr="true"/>
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
                       </property>
-                      <property name="text">
-                       <string/>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
                       </property>
+                      <layout class="QHBoxLayout" name="horizontalLayout_5">
+                       <item>
+                        <widget class="QLabel" name="m1_p3">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                           <horstretch>7</horstretch>
+                           <verstretch>6</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>500</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true"/>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
                      </widget>
                     </item>
                    </layout>
@@ -259,22 +286,6 @@ border:0px
               <enum>QFrame::Raised</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
-              <item>
-               <widget class="QLabel" name="label_5">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>1</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true"/>
-                </property>
-                <property name="text">
-                 <string>新能源消纳薄弱点及对应的关键线路编号及其对应潮流</string>
-                </property>
-               </widget>
-              </item>
               <item>
                <widget class="QFrame" name="frame">
                 <property name="sizePolicy">
@@ -327,7 +338,7 @@ border:0px
                        <string notr="true"/>
                       </property>
                       <property name="text">
-                       <string>新能源消纳率可视化图</string>
+                       <string>系统线路传输容量可视图</string>
                       </property>
                      </widget>
                     </item>
@@ -387,7 +398,7 @@ border:0px
                        <string notr="true"/>
                       </property>
                       <property name="text">
-                       <string>线路传输容量可视化图</string>
+                       <string>新能源消纳率可视图</string>
                       </property>
                      </widget>
                     </item>

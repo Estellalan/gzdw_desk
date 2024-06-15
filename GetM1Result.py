@@ -10,12 +10,13 @@ class runMatlab(QThread):
     begin = pyqtSignal()
     finished = pyqtSignal()
 
-    def __init__(self):
+    def __init__(self,gzdw_data):
+        self.gzdw_data = gzdw_data
         super().__init__()
 
     def run(self):
         self.begin.emit()
-        print("runMatlab....")
+        print("runMatlabM1....")
         self.startM2ResultMain() #运行matlab
         self.finished.emit()
 
@@ -36,7 +37,9 @@ class runMatlab(QThread):
         # 将MATLAB文件所在的目录添加到MATLAB的搜索路径中
         eng.addpath(absolute_matlab_path, nargout=0)
 
+        script_name = 'key_line_'+self.gzdw_data
+        print("M1-Matlab: "+script_name)
         # 调用MATLAB脚本
-        eng.run('key_lin_xinyi', nargout=0)
+        eng.run(script_name, nargout=0)
 
         eng.quit()
