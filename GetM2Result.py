@@ -17,7 +17,7 @@ class runMatlab(QThread):
     def run(self):
         self.begin.emit()
         print("runMatlabM2Result....")
-        #self.startM2ResultMain() #运行matlab
+        self.startM2ResultMain() #运行matlab
         self.finished.emit()
 
 

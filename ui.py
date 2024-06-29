@@ -45,10 +45,15 @@ class Main(QMainWindow,Ui_MainWindow):
         self.gzdw_data = "xinyi"
 
         self.init_ui()
-        self.setGeometry(100, 100, 800,500)
+
 
     def init_ui(self):
         self.ui = uic.loadUi("./MainWindow.ui",self)
+
+        self.comboBox = self.ui.comboBox_M1Result
+
+        self.comboBox.currentIndexChanged.connect(
+            lambda: self.choose_result_image(self.comboBox.currentText()))
 
         self.statusbar = self.ui.statusbar
 
@@ -62,8 +67,8 @@ class Main(QMainWindow,Ui_MainWindow):
         self.button_m2_btn3 = self.ui.m2_btn3
 
         self.label1 = self.ui.m1_p1
-        self.label2 = self.ui.m1_p2
-        self.label3 = self.ui.m1_p3
+        #self.label2 = self.ui.m1_p2
+        #self.label3 = self.ui.m1_p3
         self.label4 = self.ui.m2_p1
 
         self.action1 = self.ui.action1
@@ -85,6 +90,28 @@ class Main(QMainWindow,Ui_MainWindow):
         self.button_m2_btn2.clicked.connect(self.m2_run2_f)
         self.button_m2_btn3.clicked.connect(self.m2_run3_f)
 
+    def choose_result_image(self,text):
+        if(text == "系统线路传输容量"):
+            self.show_imge_LC()
+        elif(text == "新能源消纳率"):
+            self.show_imge_REC()
+        elif(text == "新能源消纳率响应前后"):
+            self.show_imge_REC_Change()
+
+    def show_imge_LC(self):
+        self.resize_image_to_fit_label(self.img_LC_path, self.label1)
+
+        print("show-image-LC")
+
+    def show_imge_REC(self):
+
+        self.resize_image_to_fit_label(self.img_REC_path, self.label1)
+        print("show-image-REC")
+
+    def show_imge_REC_Change(self):
+        self.resize_image_to_fit_label(self.img_REC_change_path, self.label1)
+
+        print("show-image-REC-Change")
     def select_data(self,data):
         self.gzdw_data = data
         print("using data: "+self.gzdw_data)
@@ -127,7 +154,9 @@ class Main(QMainWindow,Ui_MainWindow):
     def m1_run1_f(self): # 新能源消纳|线路传输容量
         self.thread_run_m1_matlab = GetM1Result.runMatlab(self.gzdw_data)
         self.showStateBarMessgeM1ResultFinished() #直接显示图片，测试时使用
-        #self.thread_run_m1_matlab.start() #开启matlab运行线程
+
+
+        self.thread_run_m1_matlab.start() #开启matlab运行线程
         self.thread_run_m1_matlab.begin.connect(self.showStateBarMessgeM1ResultRuning)
         self.thread_run_m1_matlab.finished.connect(self.showStateBarMessgeM1ResultFinished)
 
@@ -152,8 +181,8 @@ class Main(QMainWindow,Ui_MainWindow):
 
 
             self.label1.setAlignment(Qt.AlignCenter)
-            self.label2.setAlignment(Qt.AlignCenter)
-            self.label3.setAlignment(Qt.AlignCenter)
+            #self.label2.setAlignment(Qt.AlignCenter)
+            #self.label3.setAlignment(Qt.AlignCenter)
 
             # self.label3.setScaledContents(True)
             # self.label1.setScaledContents(True)
@@ -164,8 +193,10 @@ class Main(QMainWindow,Ui_MainWindow):
             # self.label2.setPixmap(img_REC)
             # self.label3.setPixmap(img_REC_change)
             self.resize_image_to_fit_label(self.img_LC_path,self.label1)
-            self.resize_image_to_fit_label(self.img_REC_path, self.label2)
-            self.resize_image_to_fit_label(self.img_REC_change_path, self.label3)
+            #self.resize_image_to_fit_label(self.img_REC_path, self.label2)
+            #self.resize_image_to_fit_label(self.img_REC_change_path, self.label3)
+
+
 
     def resize_image_to_fit_label(self, image_path, label):
         # 读取图片
