@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>1300</height>
+    <width>1043</width>
+    <height>1268</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,8 +18,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1000</width>
-    <height>1300</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -119,7 +119,7 @@ QPushButton:pressed{
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>1</horstretch>
-               <verstretch>12</verstretch>
+               <verstretch>9</verstretch>
               </sizepolicy>
              </property>
              <property name="styleSheet">
@@ -158,7 +158,7 @@ border:0px
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
-                  <verstretch>7</verstretch>
+                  <verstretch>5</verstretch>
                  </sizepolicy>
                 </property>
                 <property name="frameShape">
@@ -228,7 +228,7 @@ border:0px
                         <widget class="QLabel" name="m1_p3">
                          <property name="sizePolicy">
                           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                           <horstretch>7</horstretch>
+                           <horstretch>8</horstretch>
                            <verstretch>6</verstretch>
                           </sizepolicy>
                          </property>
@@ -243,6 +243,9 @@ border:0px
                          </property>
                          <property name="text">
                           <string/>
+                         </property>
+                         <property name="scaledContents">
+                          <bool>false</bool>
                          </property>
                          <property name="alignment">
                           <set>Qt::AlignCenter</set>
@@ -356,6 +359,9 @@ border:0px
                       <property name="text">
                        <string/>
                       </property>
+                      <property name="scaledContents">
+                       <bool>false</bool>
+                      </property>
                      </widget>
                     </item>
                    </layout>
@@ -415,6 +421,9 @@ border:0px
                       </property>
                       <property name="text">
                        <string/>
+                      </property>
+                      <property name="scaledContents">
+                       <bool>false</bool>
                       </property>
                      </widget>
                     </item>
@@ -738,8 +747,8 @@ QPushButton:pressed{
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
-     <height>28</height>
+     <width>1043</width>
+     <height>29</height>
     </rect>
    </property>
    <property name="sizePolicy">

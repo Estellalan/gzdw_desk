@@ -1,6 +1,6 @@
 import os
 
-import matlab.engine
+# import matlab.engine
 from PyQt5 import uic
 from PyQt5.QtCore import pyqtSignal, QThread
 from PyQt5.QtWidgets import QDialog
@@ -17,12 +17,12 @@ class runMatlab(QThread):
     def run(self):
         self.begin.emit()
         print("runMatlab....")
-        self.startM2ResultMain() #运行matlab
+        # self.startM2ResultMain() #运行matlab
         self.finished.emit()
 
 
-    def startM2ResultMain(self):
-        eng = matlab.engine.start_matlab()
+    # def startM2ResultMain(self):
+    #     eng = matlab.engine.start_matlab()
 
         # 获取当前Python脚本所在目录的绝对路径
         current_dir = os.path.dirname(os.path.abspath(__file__))
